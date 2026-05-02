@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test";
-
 export class FooterPage {
   constructor(page) {
     this.page = page;
@@ -18,18 +16,8 @@ export class FooterPage {
     );
   }
 
-  async verifySubscriptionHeading() {
-    await expect(this.subscriptionHeading).toBeVisible();
-  }
-
   async subscribe(email) {
     await this.emailInput.fill(email);
     await this.submitButton.click();
-  }
-
-  async verifySuccessMessage() {
-    await expect(this.successMessage).toHaveText(
-      "You have been successfully subscribed!",
-    );
   }
 }

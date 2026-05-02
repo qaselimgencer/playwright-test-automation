@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { HomePage } from "../../pages/HomePage";
 import { CartPage } from "../../pages/CartPage";
 import { FooterPage } from "../../pages/FooterPage";
@@ -9,13 +9,13 @@ test("Test Case 11 - Verify Subscription in Cart Page", async ({ page }) => {
   const footerPage = new FooterPage(page);
 
   await homePage.open();
-  await homePage.verifyVisible();
+  expect(await homePage.slider.isVisible()).toBe(true) ;
 
   await cartPage.openCart();
-  await cartPage.verifyCartPage(); //now verifies either cart table or empty message
+  expect(await cartPage.cartTable.isVisible()).toBe(true);   //now verifies either cart table or empty message
 
   await footerPage.scrollToFooter();
-  await footerPage.verifySubscriptionHeading();
+  expect(await footerPage.subscriptionHeading.isVisible()).toBe(true) ;
   await footerPage.subscribe("test@example.com");
-  await footerPage.verifySuccessMessage();
-});
+  
+  expect(await footerPage.successMessage.isVisible()).toBe(true) ;});

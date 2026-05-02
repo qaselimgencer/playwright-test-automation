@@ -1,5 +1,3 @@
-import { expect } from "@playwright/test";
-
 export class LoginPage {
   constructor(page) {
     this.page = page;
@@ -7,12 +5,9 @@ export class LoginPage {
     this.passwordInput = page.locator("[data-qa='login-password']");
     this.loginButton = page.getByRole("button", { name: "Login" });
     this.errorMessage = page.getByText("Your email or password is incorrect!");
-  }
-
-  async verifyVisible() {
-    await expect(
-      this.page.getByRole("heading", { name: "Login to your account" }),
-    ).toBeVisible();
+    this.loginHeading = this.page.getByRole("heading", {
+      name: "Login to your account",
+    });
   }
 
   async login(email, password) {
@@ -21,7 +16,5 @@ export class LoginPage {
     await this.loginButton.click();
   }
 
-  async verifyErrorVisible() {
-    await expect(this.errorMessage).toBeVisible();
-  }
+
 }

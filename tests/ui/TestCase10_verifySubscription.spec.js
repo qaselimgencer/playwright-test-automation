@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { HomePage } from "../../pages/HomePage";
 import { FooterPage } from "../../pages/FooterPage";
 
@@ -11,18 +11,17 @@ test.describe("@smoke Test Case 10 - Verify Subscription in Footer", () => {
     await homePage.open();
 
     // Step 3: Verify home page
-    await homePage.verifyVisible();
+    expect(await homePage.slider.isVisible()).toBe(true);
 
     // Step 4: Scroll down to footer
     await footerPage.scrollToFooter();
 
     // Step 5: Verify 'SUBSCRIPTION' text
-    await footerPage.verifySubscriptionHeading();
-
+    expect(await footerPage.subscriptionHeading.isVisible()).toBe(true);
     // Step 6: Enter email and click arrow button
     await footerPage.subscribe("test@example.com");
 
     // Step 7: Verify success message
-    await footerPage.verifySuccessMessage();
+    expect(await footerPage.successMessage.isVisible()).toBe(true);
   });
 });

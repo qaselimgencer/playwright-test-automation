@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test,expect } from "@playwright/test";
 import { LoginPage } from "../../pages/LoginPage";
 
 test("Test Case 2 - Invalid Login", async ({ page }) => {
@@ -11,11 +11,11 @@ test("Test Case 2 - Invalid Login", async ({ page }) => {
   await page.getByRole("link", { name: "Signup / Login" }).click();
 
   // Step 5: Verify login page visible
-  await loginPage.verifyVisible();
+  expect(await loginPage.loginHeading.isVisible()).toBe(true) ;
 
   // Step 6-7: Enter incorrect credentials and click login
   await loginPage.login("wrong@example.com", "wrongpassword");
 
   // Step 8: Verify error message
-  await loginPage.verifyErrorVisible();
+  expect(await loginPage.errorMessage.isVisible()).toBe(true) ;
 });

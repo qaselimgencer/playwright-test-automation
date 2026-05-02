@@ -4,13 +4,15 @@ import { HomePage } from "../../pages/HomePage";
 test.describe("Test Case 7 - Verify Test Cases Page", () => {
   test("Navigate to Test Cases page", async ({ page }) => {
     const homePage = new HomePage(page);
-// Step 1: Set viewport size for consistency,especially for handling responsive elements like ads 
+
+    // Step 1: Set viewport size
     await page.setViewportSize({ width: 1280, height: 800 });
+
     // Step 2: Navigate to URL
     await page.goto(process.env.BASE_URL);
 
     // Step 3: Verify home page is visible
-    await homePage.verifyVisible();
+    await expect(homePage.slider).toBeVisible();
 
     // Step 4: Click 'Test Cases' button
     await homePage.clickTestCases();
@@ -19,9 +21,12 @@ test.describe("Test Case 7 - Verify Test Cases Page", () => {
     const dismissButton = page.locator("#dismiss-button");
     if (await dismissButton.isVisible()) {
       await dismissButton.click();
+    } else {
+      // fallback: click somewhere on the page to close vignette
+      await page.mouse.click(10, 10);
     }
 
-    // Step 6: Verify navigation by heading (more reliable)
+    // Step 6: Verify navigation by heading
     await expect(
       page.getByRole("heading", { name: "Test Cases", exact: true }),
     ).toBeVisible();

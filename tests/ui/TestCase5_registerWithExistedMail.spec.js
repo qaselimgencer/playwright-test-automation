@@ -11,7 +11,7 @@ test("Test Case 5 - Register User with Existing Email", async ({ page }) => {
   await page.getByRole("link", { name: "Signup / Login" }).click();
 
   // Step 5: Verify 'New User Signup!' is visible
-  await signupPage.verifyVisible();
+  expect(await signupPage.newUserSignupHeading.isVisible()).toBe(true) ;
 
   // Step 6-7: Enter name and already registered email, then click signup
   await signupPage.registerNewUser(
@@ -20,5 +20,5 @@ test("Test Case 5 - Register User with Existing Email", async ({ page }) => {
   );
 
   // Step 8: Verify error message
-  await expect(page.getByText("Email Address already exist!")).toBeVisible();
+  expect(await page.getByText("Email Address already exist!").isVisible()).toBe(true);
 });

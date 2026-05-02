@@ -19,7 +19,8 @@ test.describe("Login Valid Flow", () => {
 
     await page.goto(process.env.BASE_URL);
     await page.getByRole("link", { name: "Signup / Login" }).click();
-    await signupPage.verifyVisible();
+    await signupPage.newUserSignupHeading.waitFor({ state: "visible" }) // Wait for the heading to be visible
+    expect(await signupPage.newUserSignupHeading.isVisible()).toBe(true);
     await signupPage.registerNewUser(testUserName, testEmail);
 
     await accountInfoPage.fillAccountInfo(testPassword);
@@ -34,7 +35,8 @@ test.describe("Login Valid Flow", () => {
     await page.goto(process.env.BASE_URL);
     await page.getByRole("link", { name: "Signup / Login" }).click();
 
-    await loginPage.verifyVisible();
+    await loginPage.loginHeading.waitFor({ state: "visible" });
+    expect(await loginPage.loginHeading.isVisible()).toBe(true);
     await loginPage.login(testEmail, testPassword);
 
     await expect(page.getByText(`Logged in as ${testUserName}`)).toBeVisible();

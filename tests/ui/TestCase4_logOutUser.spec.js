@@ -19,7 +19,7 @@ test.describe("Test Case 4 - Logout User", () => {
 
     await page.goto(process.env.BASE_URL);
     await page.getByRole("link", { name: "Signup / Login" }).click();
-    await signupPage.verifyVisible();
+    expect(await signupPage.newUserSignupHeading.isVisible()).toBe(true); 
     await signupPage.registerNewUser(testUserName, testEmail);
 
     await accountInfoPage.fillAccountInfo(testPassword);
@@ -35,7 +35,7 @@ test.describe("Test Case 4 - Logout User", () => {
     await page.goto(process.env.BASE_URL);
     await page.getByRole("link", { name: "Signup / Login" }).click();
 
-    await loginPage.verifyVisible();
+    expect(await loginPage.loginHeading.isVisible()).toBe(true);  
     await loginPage.login(testEmail, testPassword);
 
     await expect(page.getByText(`Logged in as ${testUserName}`)).toBeVisible();

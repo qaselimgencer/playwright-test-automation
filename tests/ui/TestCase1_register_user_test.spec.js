@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
 import { HomePage } from "../../pages/HomePage";
 import { SignupPage } from "../../pages/SignupPage";
 import { AccountInfoPage } from "../../pages/AccountInfoPage";
@@ -15,14 +15,25 @@ test("register and delete user with POM", async ({ page }) => {
   await homePage.open();
   await homePage.goToSignup();
 
-  await signupPage.verifyVisible();
-  const randomEmail = `process.env.USER_NAME_${Date.now()}@gmail.com`;
+  await signupPage.newUserSignupHeading.waitFor({ state: "visible" });
+  await expect(signupPage.newUserSignupHeading).toBeVisible();
+
+  const randomEmail = `user_${Date.now()}@gmail.com`;
   await signupPage.registerNewUser(process.env.USER_NAME, randomEmail);
 
   await accountInfoPage.fillAccountInfo();
   await addressPage.fillAddress();
 
+  // Create account
   await accountPage.createAccount();
-  await accountPage.verifyLoggedIn(process.env.USER_NAME);
+  await expect(accountPage.accountCreatedHeading).toBeVisible();
+  await accountPage.clickContinue();
+
+  // Verify logged in
+  await expect(accountPage.loggedInText(process.env.USER_NAME)).toBeVisible();
+
+  // Delete account
   await accountPage.deleteAccount();
+  await expect(accountPage.accountDeletedHeading).toBeVisible();
+  await accountPage.clickContinue();
 });
