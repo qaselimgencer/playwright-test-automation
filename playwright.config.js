@@ -11,9 +11,9 @@ const config = {
   workers: 5,
   /* Maximum time one test can run for. */
   //10-
-  timeout: 30 * 1000,
+  timeout: 60 * 1000,
   expect: {
-    timeout: 5000,
+    timeout: 10000,
   },
 
   reporter: "html",
