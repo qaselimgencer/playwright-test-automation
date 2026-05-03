@@ -9,28 +9,37 @@ test.describe("Test Case 9 - Search Product", () => {
 
     // Step 1-2: Launch browser & navigate to URL
     await homePage.open();
+    await expect(homePage.slider).toBeVisible();
 
-    // Step 3: Verify home page
-    expect(await homePage.slider.isVisible()).toBe(true);
-
-    // Step 4: Click Products
+    // Step 4: Click Products button
     await homePage.clickProducts();
 
-    // Step 5: Verify ALL PRODUCTS page
-    expect(await productsPage.allProductsHeading.isVisible()).toBe(true);
+    // --- FIX FOR GOOGLE ADS (VIGNETTES) ---
+    // If a Google Ad appears, we need to refresh or dismiss it.
+    // On this specific site, sometimes re-navigating is the most stable way for CI.
+    if (page.url().includes("#google_vignette")) {
+      await page.goto("https://automationexercise.com/products");
+    }
+    // ---------------------------------------
+
+    // Step 5: Verify ALL PRODUCTS page is loaded
+    // We increased the timeout slightly here because the ad might slow things down
+    await expect(productsPage.allProductsHeading).toBeVisible({
+      timeout: 15000,
+    });
+
     // Step 6: Enter product name in search input and click search button
     await productsPage.searchProduct("Tshirt");
 
-    // Step 7: Verify 'SEARCHED PRODUCTS' is visible
-    expect(
-      await page
-        .getByRole("heading", {
-          name: "Searched Products",
-          exact: true,
-        })
-        .isVisible(),
-    ).toBe(true);
-    // Step 8: Verify all the products related to search are visible
-    expect(await productsPage.productList.first().isVisible()).toBe(true);
+    // Step 7: Verify 'SEARCHED PRODUCTS' heading is visible
+    await expect(
+      page.getByRole("heading", {
+        name: "Searched Products",
+        exact: true,
+      }),
+    ).toBeVisible();
+
+    // Step 8: Verify the first product in the list is visible
+    await expect(productsPage.productList.first()).toBeVisible();
   });
 });
