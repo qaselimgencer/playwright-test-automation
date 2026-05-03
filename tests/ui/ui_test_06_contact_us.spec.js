@@ -23,7 +23,7 @@ test.describe("Test Case 6 - Contact Us Form", () => {
     // Step 4: Verify 'Get In Touch' is visible
     await expect(contactUsPage.heading).toBeVisible();
 
-    // Step 5: Fill all details in the form and upload file
+    // Step 5: Fill form + upload file
     await contactUsPage.fillForm(
       userName,
       testEmail,
@@ -31,29 +31,26 @@ test.describe("Test Case 6 - Contact Us Form", () => {
       "This is a test message.",
       filePath,
     );
+
     await expect(contactUsPage.fileInput).toHaveValue(
       /Karakaya_1923_Sitesi_Denetim_Raporu\.docx/,
     );
 
-    // Step 8-9: Submit and handle alert
-    await contactUsPage.submitForm();
+    // CRITICAL:Alert handle needed for file upload, otherwise test will fail due to unhandled alert
+      await contactUsPage.submitForm();
 
-    // Step 10: Verify success message is visible with timeout to handle processing time
+    // Step 10: Verify success message
     const successLocator = contactUsPage.successMessage;
+
     await expect(successLocator).toBeVisible({ timeout: 15000 });
+    await expect(successLocator).toContainText(/success/i);
 
-    // if success message is visible, check if it contains expected text
-    const text = await successLocator.innerText();
-    if (text && text.trim().length > 0) {
-      await expect(successLocator).toContainText("Success");
-    } else {
-      console.warn("⚠️ Success message element visible but text is empty.");
-    }
-
-    // Step 11: Click 'Home' button and verify home page
+    // Step 11: Click Home and verify
     await contactUsPage.clickHomeButton();
-    // fallback: click somewhere on the page to close vignette
+
+    // fallback click (overlay ihtimaline karşı)
     await page.mouse.click(10, 10);
+
     await expect(homePage.slider).toBeVisible();
   });
 });
