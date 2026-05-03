@@ -1,129 +1,71 @@
-# Playwright Test Automation Framework
+# Playwright End-to-End Automation Framework (JS) 🚀
 
-This project is a test automation framework built with Playwright using JavaScript. It covers both API and UI testing in a single, structured setup.
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=Playwright&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white)
 
-The framework is designed to be simple, maintainable, and scalable, following common industry practices.
+This repository contains a professional-grade **End-to-End (E2E) Test Automation Framework** built with **Playwright** and **JavaScript**. It is designed to validate both UI and API layers of the [Automation Exercise](https://automationexercise.com/) platform.
 
-## Scope
+## 📊 Project Status & Quality Metrics
 
-The project includes:
+- **Total Test Cases:** 25
+- **Latest Execution:** 25 Passed / 0 Failed (100% Success Rate) ✅
+- **CI/CD Status:** Fully operational on Jenkins
+- **Framework Type:** Page Object Model (POM)
 
-* API testing using Playwright request
-* UI testing using Page Object Model (POM)
-* End-to-end test scenarios
-* Structured test organization
+## 🌟 Key Features
 
-### Test Distribution
+- **Hybrid Framework:** Integrated UI and API testing in a single repository.
+- **Page Object Model (POM):** Clean, modular, and maintainable code architecture.
+- **CI/CD Integration:** Automated execution flows via **Jenkins**.
+- **Ad-Blocker Logic:** Custom scripts to handle and bypass Google Vignette Ads.
+- **Security:** Advanced secret management using `dotenv` and Jenkins Environment Variables.
+- **Professional Reporting:** HTML reports featuring screenshots, videos, and trace logs for failures.
 
-* 14 API test scenarios
-* 11 UI test scenarios
+## 🛠️ Tech Stack
 
----
+- **Tool:** Playwright
+- **Language:** JavaScript (Node.js)
+- **CI/CD:** Jenkins
+- **Reporting:** Playwright HTML Reporter
+- **Configuration:** Dotenv
 
-## Setup
+## 📂 Project Structure
 
-Clone the repository:
+```text
+├── pages/                # Page Object Model (POM) files
+├── tests/
+│   ├── ui/               # UI test suites (.spec.js)
+│   └── api/              # API test suites (.spec.js)
+├── playwright.config.js  # Global Playwright settings
+├── .env.local            # Local environment variables (Git ignored)
+└── package.json          # Project dependencies & scripts
 
-```bash
+## 🚀 Getting Started
+### Prerequisites
+- Node.js (v18+)
+- npm
+### Installation
+
+1. Clone the repository:
 git clone https://github.com/qaselimgencer/playwright-test-automation.git
-cd playwright-test-automation
-```
-
-Install dependencies:
-
-```bash
+2. Install dependencies:
 npm install
-```
+3. Install browsers:
+npx playwright install
 
-Create a `.env.local` file in the root directory:
+### Running Tests
+- All Tests: npx playwright test
+- UI Only: npx playwright test tests/ui
+- API Only: npx playwright test tests/api
+- Open Report: npx playwright show-report
 
-```env
-BASE_URL=https://automationexercise.com
-
-USER_NAME=Riza Gencalp
-PASSWORD=123456
-
-TEST_EMAIL=rizagencalp@gmail.com
-TEST_PASSWORD=123456
-
-APITEST_EMAIL=yasemincak@gmail.com
-APITEST_PASSWORD=123456
-```
-
+## 🏗️ CI/CD Workflow (Jenkins)
+The project is fully integrated into a Jenkins pipeline:
+- SCM: Automatically pulls the latest code from the clean-main branch.
+- Environment: Securely injects credentials via Jenkins Secret Files.
+- Execution: Runs tests in headless mode for server compatibility.
+- Artifacts: Archives results and displays the Playwright HTML Report directly on the Jenkins dashboard.
 ---
-
-## Running Tests
-
-Run all tests:
-
-```bash
-npx playwright test
+Author: Selim Gençer
 ```
-
-Run API tests only:
-
-```bash
-npx playwright test tests/api
-```
-
-Run UI tests only:
-
-```bash
-npx playwright test tests/ui
-```
-
-Run a specific test:
-
-```bash
-npx playwright test -g "Verify Login"
-```
-
----
-
-## Reporting
-
-To open the HTML report:
-
-```bash
-npx playwright show-report
-```
-
-On failure:
-
-* Screenshots are captured
-* Videos are recorded
-* Traces are generated
-
-Reports are stored in:
-
-```
-playwright-report/
-```
-
----
-
-## Project Structure
-
-```
-tests/
-  api/        API test cases
-  ui/         UI test cases
-
-pages/        Page Object Models
-
-playwright.config.js
-```
-
----
-
-## Notes
-
-The framework combines API and UI testing in a single project to demonstrate a complete testing approach.
-
-Tests are organized for readability and can be extended easily for new scenarios.
-
----
-
-## Purpose
-
-This project is built for learning, practice, and demonstrating test automation skills using Playwright.
