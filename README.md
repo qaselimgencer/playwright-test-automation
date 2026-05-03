@@ -4,6 +4,8 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white)
 
+![Test Report Summary](./assets/test-report.png)
+
 This repository contains a professional-grade **End-to-End (E2E) Test Automation Framework** built with **Playwright** and **JavaScript**. It is designed to validate both UI and API layers of the [Automation Exercise](https://automationexercise.com/) platform.
 
 ## 📊 Project Status & Quality Metrics
