@@ -6,6 +6,7 @@ node_modules/
 .env.local
 .env.prod
 .env.stage
+.env.dev
 
 # Playwright outputs
 test-results/
