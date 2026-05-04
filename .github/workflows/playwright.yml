@@ -8,6 +8,17 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    
+    # Define environment variables for the tests
+    env:
+      BASE_URL: https://automationexercise.com
+      USER_NAME: "Riza Gencalp"
+      PASSWORD: "123456"
+      TEST_EMAIL: "rizagencalp@gmail.com"
+      TEST_PASSWORD: "123456"
+      APITEST_EMAIL: "yasemincak@gmail.com"
+      APITEST_PASSWORD: "123456"
+
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
