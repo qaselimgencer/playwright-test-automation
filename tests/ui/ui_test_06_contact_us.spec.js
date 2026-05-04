@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { HomePage } from "../../pages/HomePage";
 import { ContactUsPage } from "../../pages/ContactUsPage";
+import path from "path";
 
 test.describe("Test Case 6 - Contact Us Form", () => {
   test("Submit contact us form successfully", async ({ page }) => {
