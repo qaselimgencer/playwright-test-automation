@@ -1,8 +1,10 @@
 # Playwright End-to-End Automation Framework (JS) 🚀
-
+![Playwright Tests](https://github.com/qaselimgencer/playwright-test-automation/actions/workflows/playwright.yml/badge.svg)
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=Playwright&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 ![Jenkins](https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white)
+![ISTQB](https://img.shields.io/badge/ISTQB-Certified-blue?style=for-the-badge)
 
 ![Test Report Summary](./assets/test-report.png)
 
@@ -12,8 +14,9 @@ This repository contains a professional-grade **End-to-End (E2E) Test Automation
 
 - **Total Test Cases:** 25
 - **Latest Execution:** 25 Passed / 0 Failed (100% Success Rate) ✅
-- **CI/CD Status:** Fully operational on Jenkins
-- **Framework Type:** Page Object Model (POM)
+- **CI/CD Integration:** Verified on **GitHub Actions** and **Jenkins**.
+**Execution Environment:** Linux (Ubuntu) Headless & Windows Headed.
+
 
 ## 🌟 Key Features
 
@@ -31,6 +34,20 @@ This repository contains a professional-grade **End-to-End (E2E) Test Automation
 - **CI/CD:** Jenkins
 - **Reporting:** Playwright HTML Reporter
 - **Configuration:** Dotenv
+
+## 🌟 Technical Challenges & Solutions
+
+### 1. Dynamic Google Vignette Ads Bypass
+The target platform frequently serves random, unpredictable Google Vignette ads that break standard automation flows.
+- **My Solution:** I implemented a robust intercept and bypass logic using Playwright's Page Object Model. The framework dynamically detects the ad-frame and handles the dialog without failing the test suite.
+- **Impact:** Achieved 100% reliability in headless CI environments where manual intervention is impossible.
+
+### 2. Cross-Platform File Upload (Relative Path Resolution)
+Handled the common "path mismatch" issue between Windows development machines and Linux-based CI servers.
+- **My Solution:** Used the `path` module and dynamic directory resolution (`process.cwd()`) to ensure that file upload tests run seamlessly across different operating systems.
+
+---
+
 
 ## 📂 Project Structure
 
